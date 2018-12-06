@@ -1,0 +1,36 @@
+= The Halting Problem =
+
+    There is *no computable method* that is guaranteed to correctly decide
+    whether a TM is non-terminating.
+
+The language
+{{$
+A_{\textrm{TM}} = \{ \langle M, w \rangle \mid M \textrm{ accepts } w \}
+}}$
+is undecidable.
+
+== Proof ==
+
+Assume for the purpose of contradiction that $A_{\textrm{TM}}$ is decidable.
+Create the TM $H$ that decides $A_{\textrm{TM}}$:
+{{$
+H\left(\langle M, w \rangle\right) = \begin{cases}
+  accept & \textrm{if } M \textrm{ accepts } w \\
+  reject & \textrm{otherwise}
+\end{cases}
+}}$
+This is possible since $A_{\textrm{TM}}$ has been assumed to be decidable.
+
+Now create the TM $D$, that, on input $\langle M \rangle$, runs
+$H\left(\langle M, \langle M \rangle\rangle\right)$, and does the opposite of
+what $H$ does:
+{{$
+D\left(\langle M \rangle\right) = \begin{cases}
+  accept & \textrm{if } M \textrm{ does not accept } \langle M \rangle \\
+  reject & \textrm{if $M$ accepts $\langle M \rangle$}
+\end{cases}
+}}$
+
+Running $D$ on $\langle D \rangle$ creates a paradox: it would accept if it
+would reject, and vice versa. This is a contradiction and so the only assumption
+made, that $A_{\textrm{TM}}$ is decidable, must be false.

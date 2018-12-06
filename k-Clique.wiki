@@ -1,0 +1,4 @@
+= $k$-Clique Problem =
+
+    Given a graph $G$ and a number $n$, does $G$ contain a subgraph which is a
+    clique of size $n$?

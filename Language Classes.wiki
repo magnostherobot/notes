@@ -1,0 +1,35 @@
+= Regular Languages =
+
+A language is _defined_ or _recognised_ or _accepted_ by an FSA if the
+machine accepts all strings in the language, and no other strings.
+The language recognised by an FSA $M$ can be expressed as $L(M)$.
+
+_More formally_, Let $M = (Q, \Sigma, \delta, q_0, F)$ be a DFA and let
+$w = w_1w_2 \ldots w_n$ be a string where each $w_i$ is a member of the
+alphabet $\Sigma$. $M$ *accepts* $w$ if a sequence of states
+$r_0, r_1, \ldots r_n \in Q$ exists where:
+1. $r_0 = q_0$
+2. $\delta(r_i, w_{i+1}) = r_{i+1}$ for $i = 0, \ldots, n - 1$
+3. $r_n \in F$
+
+$M$ *recognises* $A$ iff $A = \{w \mid M \mathbin{\textrm{accepts}} w\}$
+
+A language is a regular language iff there is a DFA can recognises it.
+
+= Context-free Languages =
+
+A language is _defined_ or _recognised_ or _accepted_ by a PDA if the
+machine accepts all strings in the language, and no other strings.
+The language recognised by a PDA $M$ can be expressed as $L(M)$.
+
+_More formally_, Let $M = (Q, \Sigma, \Gamma, \delta, q_0, F)$ be a PDA and let
+$w = w_1w_2 \ldots w_n$ be a string where each $w_i$ is a member of the
+alphabet $\Sigma$. $M$ *accepts* $w$ if a sequence of states
+$r_0, r_1, \ldots r_n \in Q$ exists where:
+1. $r_0 = q_0$
+2. $\delta(r_i, w_{i+1}) = r_{i+1}$ for $i = 0, \ldots, n - 1$
+3. $r_n \in F$
+
+$M$ *recognises* $A$ iff $A = \{w \mid M \mathbin{\textrm{accepts}} w\}$
+
+A language is a regular language iff there is a DFA can recognises it.

@@ -1,0 +1,10 @@
+= Kleene's Recursive Function Model =
+
+The following are computable:
+- functions which return a constant
+- functions which return one of their inputs
+- successor functions
+- compositions of two computable functions
+- definitions in terms of already-defined computable functions
+- definitions in terms of finding the least value of an already-defined
+  computable function

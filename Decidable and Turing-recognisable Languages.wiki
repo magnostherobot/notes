@@ -1,0 +1,32 @@
+= Turing-recognisability =
+
+    A language is _Turing-recognisable_ iff a TM can be constructed that can
+    recognise it.
+
+= Co-Turing-recognisability =
+
+    A language $L$ is _co-Turing-recognisable_ iff its complement $\bar L$
+    is Turing-recognisable.
+
+= Decidability =
+
+A language is decidable iff a deciding TM can be constructed that recognises it.
+
+== Decidability Through Recognisability ==
+
+    A language is decidable iff it is Turing-recognisable and co-Turing
+    recognisable.
+
+=== Proof ===
+
+If $L$ is decidable, there exists a TM $M_L$ that decides it.
+Any decidable language is Turing-recognisable, so $L$ is Turing-recognisable.
+A decider for $\bar L$ can be constructed by swapping $M_L$'s invert states, so
+$\bar L$ is decidable (and therefore Turing-recognisable) too.
+$\bar L$'s Turing-recognisability means $L$ is co-Turing-recognisable.
+
+If $L$ and $\bar L$ are Turing-recognisable, they have recognising TMs
+$M_L$ and $M_{\bar L}$, respectively. A TM $M$ can be constructed that simulates
+both $M_L$ and $M_{\bar L}$ in parallel, accepting if $M_L$ accepts, and
+rejecting if $M_{\bar L}$ accepts. Since either $M_L$ or $M_{\bar L}$ must
+accept for every input, $M$ is a decider for $L$. Therefore, $L$ is decidable.

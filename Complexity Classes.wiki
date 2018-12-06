@@ -1,0 +1,92 @@
+= Complexity Classes =
+
+Let $f \colon \ \mathbb{N} \rightarrow \mathbb{N}$ be a function,
+and
+let $n$ be the length of the input.
+
+{{$%align%
+\textrm{DTIME}(f(n)) &= \{ L \mid
+  \textrm{$L$ is decided by a DTM in at most $f(n)$ steps} \} \\
+\textrm{DSPACE}(f(n)) &= \{ L \mid
+  \textrm{$L$ is decided by some DTM via at most $f(n)$ cells} \} \\
+\textrm{NTIME}(f(n)) &= \{ L \mid
+  \textrm{$L$ is decided by some NTM in at most f(n) steps} \} \\
+\textrm{NSPACE}(f(n)) &= \{ L \mid
+  \textrm{$L$ is decided by some NTM via at most f(n) cells} \} \\
+\textrm{P} &= \bigcup_{k \geq 1} \textrm{DTIME}(n^k) \\
+\textrm{L} &= \textrm{DSPACE}(\log n) \\
+\textrm{EXP} &= \bigcup_{k \geq 1} \textrm{DTIME}(2^{n^k}) \\
+\textrm{PSPACE} &= \bigcup_{k \geq 1} \textrm{DSPACE}(n^k) \\
+\textrm{NP} &= \bigcup_{k \geq 1} \textrm{NTIME}(n^k) \\
+\textrm{NL} &= \textrm{NSPACE}(\log n) \\
+\textrm{NEXP} &= \bigcup_{k \geq 1} \textrm{NTIME}(2^{n^k}) \\
+\textrm{NPSPACE} &= \bigcup_{k \geq 1} \textrm{NSPACE}(n^k) \\
+}}$
+
+== Time Speedup Lemma ==
+
+    Let $L \in \textrm{DTIME}(f(n))$. Then, for any $c > 0$,
+    $L \in \textrm{DTIME}(f'(n))$ where $f'(n)$ = $c \cdot f(n) + O(n)$.
+
+== Tape Compression Lemma ==
+
+    Let $L \in \textrm{DSPACE}(f(n))$. Then, for any $c > 0$,
+    $L \in \textrm{DSPACE}(f'(n))$ where $f'(n) = c \cdot f(n) + O(1)$.
+
+== Time Hierarchy Theorem ==
+
+    Let $f(n)\log f(n) = o(g(n))$. Then
+    $\textrm{DTIME}(g(n)) \backslash \textrm{DTIME}(f(n)) \neq \emptyset$
+
+== Space Hierarchy Theorem ==
+
+    Let $f(n) = o(g(n))$. Then
+    $\textrm{SPACE}(g(n)) \backslash \textrm{SPACE}(f(n)) \neq \emptyset$
+
+== Relations ==
+
+{{$%align%
+\textrm{DSPACE}(f(n)) &\subseteq \textrm{NSPACE}(f(n)) \\
+\textrm{DTIME}(f(n)) &\subseteq \textrm{NTIME}(f(n)) \\
+\textrm{DTIME}(f(n)) &\subseteq \textrm{DSPACE}(f(n)) \\
+\textrm{NTIME}(f(n)) &\subseteq \textrm{NSPACE}(f(n)) \\
+}}$
+
+{{$%align%
+\textrm{P} \subset \textrm{EXP} \\
+\textrm{NP} \subset \textrm{NEXP} \\
+\textrm{L} \subset \textrm{PSPACE} \subset \textrm{EXPSPACE} \\
+\textrm{P} \subseteq \textrm{NP} \subseteq \textrm{DSPACE} \\
+\textrm{P} \subseteq \textrm{NP} \subseteq \textrm{PSPACE}
+  \subseteq \textrm{NPSPACE} \subseteq \textrm{EXP} \\
+\textrm{EXP} \subseteq \textrm{NEXP} \\
+}}$
+
+=== Proof that $\textrm{NTIME}(f(n)) \subseteq \textrm{DSPACE}(f(n))$ ===
+
+An NTM completing in $f(n)$ time has nondeterministic decision trees with
+deepest depth of at most $f(n)$.
+A DTM can be constructed that simulates each branch of the NTM one-at-a-time,
+reusing the same space over and over for each branch.
+All branches of the NTM are limited to writing to at most $f(n)$ cells,
+since that's all they can write to in $f(n)$ time, so the DTM will only need
+$f(n)$ space to store the NTM's tape contents.
+The space required to store the current nondeterministic branch being emulated
+will be some factor of the total number of possible branches $f(n)$.
+Additionally, some extra space will need to be used to store the current state
+of the NTM, etc., but these are constant increases to the space used.
+
+The final space used in the DTM will be $2 \cdot f(n) + c$. The tape compression
+lemma shows that a language in $\textrm{DSPACE}(2 \cdot f(n) + c)$ is also in
+$\textrm{DSPACE}(f(n))$.
+
+=== Proof that $\textrm{NSPACE}(f(n)) \subseteq \bigcup_c \textrm{DTIME}(c^{O(f(n))})$ ===
+
+If an NTM uses at most $f(n)$ cells, then there is $c^{f(n)}$ possible states
+of those cells. A graph can be created, with nodes representing the NTM's states
+and edges representing possible transitions in the NTM. To check if a string is
+accepted by the NTM, a connection between the start configuration's node and any
+accepting state's nodes (this can be simplified to a single accepting state, and
+therefore a single node in the graph), which can be done in polynomial time
+varying on the size of the graph, which means it would take
+$c^{O(f(n))}$ time.

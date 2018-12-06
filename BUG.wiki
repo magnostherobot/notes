@@ -1,0 +1,35 @@
+= BUG Algorithms =
+
+Bug algorithms are a set of obstacle traversal algorithms inspired by the
+movements of insects. The more primitive examples are designed to work with
+"tactile" (extermely short-range) sensors.
+
+== Bug 0 ==
+
+Bug 0 algorithms attempt to head directly from a the robot's position to the
+goal. If an obstacle is encountered, they navigate around the obstacle closely
+until they can head straight towards the goal again.
+
+== Bug 1 ==
+
+Bug 1 algorithms head towards the goal. When an obstacle is encountered, they
+navigate around the entire obstacle, recording the point at which they were
+closest to the goal. Once circling the obstacle, they navigate around it again
+back to the position they recorded as the closest to the goal, and head stright
+towards the goal again.
+
+== Bug 2 ==
+
+Bug 2 algorithms draw a straight line from the start point to the goal. When
+encountering an obstacle, they encircle it until they meet this drawn line,
+at which point they leave the obstacle and follow the line again.
+
+== POTBUG ==
+
+POTBUG algorithms give the robot awareness of its physical radius, preventing it
+from heading down areas that would be too tight for it.
+
+=== SMOOTHBUG ===
+
+SMOOTHBUG algorithms enhance POTBUG algorithms by increasing the radius of the
+sensors, creating smoother paths.

@@ -1,0 +1,8 @@
+= Rice's Theorem =
+
+     Any non-trivial property of the language recognised by a TM is not
+     decidable.
+
+A _non-trivial property_ is a property that can be used to tell any two
+languages apart; a property that some languages possess and others don't.
+A _trivial property_ is possessed by either all languages, or none.

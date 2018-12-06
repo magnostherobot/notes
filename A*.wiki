@@ -1,0 +1,35 @@
+= Uniform Cost Search =
+
+A _uniform cost search_ is one where every branch in the game tree has an equal
+cost to "move down". The cost to move from the root of the game tree to a
+particular node is equal to this node's depth in the tree.
+
+= Best-first Search =
+
+A _best-first search_ is a search algorithm which uses a heuristic to evaluate
+the costs of branches in the game tree.
+
+= Greedy Search =
+
+A _greedy search_ is a search algorithm that assumes that the best choice in a
+local decision is the best choice generally.
+
+Greedy searches are not complete, as they cannot "go back" on a previously-made
+decision.
+They are not optimal, since the best choice in a local decision is
+_not necessarily_ the best choice generally.
+
+= A* Search =
+
+An _A* search_ is a combination of both a uniform cost search and a greedy
+best-first search:
+{{$
+f(x) = g(x) + h(x)
+}}$
+where $f(x)$ is the cost of route $x$ in A*, $g(x)$ is its cost in a uniform
+cost search, and $h(x)$ is its cost in a greedy best-first search.
+
+An A* search is complete so long as $g(x)$'s costing heuristic is
+_inadmissable_ (never estimates a cost higher than the real cost).
+It is optimal, and _optimally efficient_ (optimal in the shortest time
+possible).

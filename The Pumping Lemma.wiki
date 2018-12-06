@@ -1,0 +1,50 @@
+= The Pigeonhole Principle =
+
+    If $n$ items are put into $m$ containers, with $n > m$, then at least one
+    container must contain more than one item.
+
+Or, more formally:
+
+    There does not exist an injective function whose codomain is smaller than
+    its domain.
+
+= The Pumping Lemma for Regular Languages =
+
+There exists a _pumping value_ $p$ for a regular language $L$ such that any
+string $w \in L$ with length $|w| \geq p$ can be split $w = xyz$ following the
+following rules:
+1. $xy^iz \in L$ ($i \geq 0$)
+2. $|y| > 0$ ($y \neq \varepsilon$)
+3. $|xy| \leq p$
+The value of $p$ doesn't usually matter; we don't need its value to prove
+violations of the pumping lemma.
+
+== Proof ==
+
+Let $p$ be the number of states in an FSA $M$ that minimally recognises
+(recognises using the fewest states possible) the language
+$A = L(M)$ in which there exists a string $w$ where $|w| \geq p$.
+For $w$ there must be $|w|$ transitions in its computation in $M$.
+A history of all the states transitioned through in this computation must be
+$|w| + 1$ states long, and $|w| + 1 \geq p$.
+Due to the pigeonhole principle, there must be a repetition of at least one
+state $q$ in the first $p + 1$ states in this history.
+Let:
+- $x$ be the substring of $w$ that brings $M$ from the start state to $q$
+- $y$ be the substring of $w$ that bings $M$ from the first occurence of $q$ to
+  its last occurence in the first $p + 1$ states in the history
+- $z$ be the substring of $w$ that brings $M$ from the last occurence of $q$ in
+  the first $p + 1$ states in the history to the final state in the history.
+
+Since $y$ brings the computation from a state to the same state, it can be
+repeated any number of times (or removed) without affecting the acceptability of
+the string.
+
+= The Pumping Lemma for Context-free Languages =
+
+There exists a _pumping value_ $p$ for a context-free language $L$ such that
+any string $w \in L$ with length $w \geq p$ can be split $w=uvxyz$ following the
+following rules:
+# $uv^ixy^iz \in L$ ($i \geq 0$)
+# $|vy| > 0$
+# $|vxy| \leq p$

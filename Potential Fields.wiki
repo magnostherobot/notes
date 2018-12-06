@@ -1,0 +1,15 @@
+= Potential Fields =
+
+Potential fields are fields representing costs of a robot moving in
+$\mathcal{R}^2$ space.
+
+== Goal Potential ==
+
+Goal potential is a potential varying on the distance to the goal.
+
+== Obstacle Potential ==
+
+Obstacle potential is a potential varying on the distances to the obstacles in
+the course. It is often a sum of individual potentials for each obstacles.
+These potentials are often based on an inverse of the distance to an obstacle,
+to create an asymptotic curve when near (or touching) the obstacle.

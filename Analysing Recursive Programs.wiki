@@ -1,0 +1,48 @@
+= Analysing Recursive Programs =
+
+== The Master Theorem ==
+
+Works for recurrences of form
+{{$
+T(n) = aT\frac{n}{b} + f(n)
+}}$
+when $a \geq 1$, $b > 1$ and $f(n)$ is asymptotically positive.
+
+=== Case 1 ===
+
+{{$
+f(n) = O\left(n^{\log_b{a - \epsilon}}\right), \epsilon > 0
+\implies T(n) = \Theta\left(n^{\log_ba}\right)
+}}$
+
+Basically, if $f(n)$ is negligible at each recursion, the recursive calls
+dominate.
+
+=== Case 2 ===
+
+{{$
+f(n) = \Theta\left(n^{\log_b{a}}\log^k{n}\right), k \geq 0
+\implies T(n) = \Theta\left(n^{\log_b{a}}\log{k + 1}n\right)
+}}$
+
+=== Case 3 ===
+
+{{$
+f(n) = \Omega\left(n^{\log_b{a + \epsilon}}\right), \epsilon > 0,
+af\left(\frac{n}{b}\right) \leq cf(n), c < 1
+\implies T(n) = \Theta(f(n))
+}}$
+
+Happens when $f(n)$ dominates the total recursive work.
+
+== Case Study: Karatsuba Multiplication ==
+
+Expression:
+{{$
+a_1b_0 + a_0b_1 = (a_1 + a_0)(b_1 + b_0) - a_1b_1 - a_0b_0
+}}$
+
+Complexity:
+{{$
+T(n) = 3T\left(\frac{n}{2}\right) + O(n) = \Theta\left(\log_2{3}\right)
+}}$

@@ -1,0 +1,16 @@
+= Baye's Rule =
+
+{{$
+P(B|A) = \frac{P(B)}{P(A)} P(A|B)
+}}$
+
+== Proof ==
+
+{{$%align%
+P(A|B) &= \frac{P(A \land B)}{P(B)} \\
+P(B|A) &= \frac{P(B \land A)}{P(A)} \\
+\frac{P(B|A)}{P(A|B)} &= \frac{P(B \land A) P(B)}{P(A \land B) P(A)} \\
+P(A \land B) &= P(B \land A) \\
+\frac{P(B|A)}{P(A|B)} &= \frac{P(B)}{P(A)} \\
+P(B|A) &= \frac{P(B)}{P(A)} P(A|B)
+}}$

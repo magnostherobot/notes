@@ -1,0 +1,58 @@
+= Analysing Program Complexity =
+
+- Abstract to machine-independent measurements
+- Focus on scaling with size of input
+- Only consider _dominant terms_
+
+== Asymptotic Bounds ==
+
+*Note:* $=$ is *not* equality, just likeness.
+
+=== Upper Bound ===
+
+$T(n)$ grows *no more than* $f(n)$ for large $n$.
+
+Examples:
+- $12n^3 + 8n + 20 = O(n^3)$
+- $12n^3 + 8n + 20 = O(n^5)$
+
+Features:
+- Transitivity: $t = O(f), f = O(g) \implies t = O(g)$
+- Addition: $f = O(h), g = O(h) \implies f + g = O(h)$
+
+=== Lower Bound ===
+
+$T(n)$ grows *no less than* $f(n)$ for large $n$.
+
+- $12n^3 + 8n + 20 = \Omega(n^3)$
+- $12n^3 + 8n + 20 = O(n)$
+
+- Transitivity: $t = \Omega(f), f = \Omega(g) \implies t = \Omega(g)$
+- Addition: $f = \Omega(h), g = \Omega(h) \implies f + g = \Omega(h)$
+
+=== Tight Bound ===
+
+$T(n)$ grows *like* $f(n)$ for large $n$.
+Basically, it's both the upper and lower bound.
+
+- $12n^3 + 8n + 20$ = $\Theta(n^3)$
+
+- Transitivity: $t = \Theta(f), f = \Theta(g) \implies t = \Theta(g)$
+- Addition: $f = \Theta(h), g = \Theta(h) \implies f + g = \Theta(h)$
+
+== Rules of Thumb ==
+
+- $a_kn^k + a_{k-1}n^{k-1} + \ldots + a_0 = \Theta(n^k)$ if $a_k > 0$
+- $c \log_a(n) = \Theta(\log_b(n))$ - just write $\Theta(\log(n))$
+- $\log(n)$ is $O(n^k)$ for $k > 1$
+- $n^k = O(c^n)$
+
+== Jargon ==
+
+- _Linear_: $\Theta(n)$
+- _Quadratic_: $\Theta(n^2)$
+- _Cubic_: $\Theta(n^3)$
+- _Constant_: $\Theta(c)$ (usually written $\Theta(1)$)
+- _Polynomial_: $\Theta(n^k)$ ($k > 0$)
+- _Logarithmic_: $\Theta(\log^k(n))$ ($k > 0$)
+- _Exponential_: $\Theta(c^n)$ ($c > 1$)

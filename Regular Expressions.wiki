@@ -1,0 +1,145 @@
+= Regular Expressions =
+
+Definition:
+1. $\varepsilon$ and $\emptyset$ are regular expressions.
+2. All $s \in \Sigma$ are regular expressions.
+3. If $R_1$ and $R_2$ are regular expressions, so are:
+  1. $R_1 \circ R_2$ or $R_1R_2$ (their concatenation).
+  2. $R_1 \cup R_2$ (their union).
+  3. $R_1^{*}$ and $R_2^{*}$ (their closures).
+  4. $R_1 \cap R_2$ (their intersection).
+
+These operations may be used on single characters, for example
+$\texttt{a}^{*}$. Really, the set notation is being removed to look
+nice: really $\{\texttt{a}\}^{*}$ is happenning.
+
+Every regular expression defines a language; the language represented by a
+regular expression $R$ is expressed as $L(R)$.
+
+== Concatenation ==
+
+{{$
+A \circ B = AB = \{ w_1w_2 \mid w_1 \in A \land w_2 \in B \}
+}}$
+$w_1w_2$ is literally a string $w_1$ followed by a string $w_2$.
+
+=== Proof of Closure ===
+
+$A$ and $B$ are both regular languages, and so have DFAs that recognise them:
+$M_A = (Q_A, \Sigma, \delta_A, q_A, F_A)$ and
+$M_B = (Q_B, \Sigma, \delta_B, q_B, F_B)$, respectively.
+Construct an NFA $M_{A \circ B}$:
+{{$%align%
+M_{A \circ B} &= (Q, \Sigma, \delta, q_A, F_B) \\
+Q &= Q_A \cup Q_B \\
+\delta(q,w) &= \begin{cases}
+  \{\delta_A(q,w)\} & \textrm{if } q \in Q_A \\
+  \{\delta_B(q,w)\} & \textrm{if } q \in Q_B \\
+  \{q_B\} & \textrm{if } q \in F_A \land w = \varepsilon \\
+  \emptyset & \textrm{otherwise}
+\end{cases}
+}}$
+$M_{A \circ B}$ starts in the start state of $M_A$ ($q_A$). When it reaches
+one of $M_A$'s accept states (which are _not_ accept states in $M_{A \circ B}$),
+it can $\varepsilon$-transition to the start state of $M_B$ ($q_B$).
+Therefore, a string accepted by $M_{A \circ B}$ must contain a substring
+that would be accepted by $M_A$, followed directly by a substring that would be
+accepted by $M_B$ - $M_{A \circ B}$ recognises the concatenation of $A$ and $B$.
+If $M_{A \circ B}$ recognises a language, it must be regular, since NFAs can be
+reduced to DFAs, and all languages recognised by DFAs are regular by definition.
+
+== Union ==
+
+{{$
+A \cup B = \{ s \mid s \in A \lor s \in B \}
+}}$
+
+=== Proof of Closure ===
+
+$A$ and $B$ are both regular languages, and so have DFAs that recognise them:
+$M_A = (Q_A, \Sigma, \delta_A, q_A, F_A)$ and
+$M_B = (Q_B, \Sigma, \delta_B, q_B, F_B)$, respectively.
+Construct an NFA $M_{A \cup B}$:
+{{$%align%
+M_{A \cup B} &= (Q, \Sigma, \delta, q_0, F) \\
+Q &= Q_A \cup Q_B \cup \{ q_0 \} \\
+F &= F_A \cup F_B \\
+\delta(q,w) &= \begin{cases}
+  \{\delta_A(q,w)\} & \textrm{if } q \in Q_A \\
+  \{\delta_B(q,w)\} & \textrm{if } q \in Q_B \\
+  \{q_{A}, q_{B}\} & \textrm{if } q = q_0 \land w = \varepsilon \\
+  \emptyset & \textrm{otherwise}
+\end{cases}
+}}$
+$M_{A \cup B}$ has a start state with two $\varepsilon$-transitions:
+one each to the start states of $M_A$ and $M_B$.
+$q_0$ has no other available transitions, meaning $M_{A \cup B}$ "starts"
+nondeterministically in both $q_A$ and $q_B$. If either $M_A$ or $M_B$ would
+accept a given string, so will $M_{A \cup B}$, and $M_{A \cup B}$ accepts no
+other strings. If $M_{A \cup B}$ recognises a
+language, it must be regular, since NFAs can be reduced to DFAs, and all
+languages recognised by DFAs are regular by definition.
+
+== Intersection ==
+
+{{$
+A \cap B = \{ s \mid s \in A \land s \in B \}
+}}$
+
+=== Proof of Closure ===
+
+$A$ and $B$ are both regular languages, and so have DFAs that recognise them:
+$M_A = (Q_A, \Sigma, \delta_A, q_A, F_A)$ and
+$M_B = (Q_B, \Sigma, \delta_B, q_B, F_B)$, respectively.
+Construct a DFA $M_{A \cap B}$:
+{{$%align%
+M_{A \cap B} &= (Q, \Sigma, \delta, q_{q_Aq_B}, F) \\
+Q &= \{ q_{ab} \mid a \in Q_A \land b \in Q_B \} \\
+F &= \{ q_{ab} \in Q \mid a \in F_A \land b \in F_B \} \\
+\delta(q_{ab},w) &= q_{a'b'} \textrm{ where }
+  a' = \delta_A(a,w), b' = \delta_B(b,w)
+}}$
+$M_{A \cap B}$ has a state for every possible pairing of a state from $M_A$ and
+a state from $M_B$. Its accepting states are the states that represent a pair
+of accepting states - if both $M_A$ and $M_B$ would accept the word, so does
+$M_{A \cap B}$ (and only then).
+Therefore $M_{A \cap B}$ recognises $A \cap B$.
+If $M_{A \cap B}$ recognises a language, it must be regular, since all
+languages recognised by DFAs are regular by definition.
+
+== Star/Powerset/Kleene Star ==
+
+{{$
+A^{*}
+}}$
+The star operation on a regular expression $A$ represents all possible
+combinations of $A$'s contents, of any length, allowing repetitions. _Any_
+length, including $\varepsilon$ (but not $\emptyset$).
+
+=== Proof of Closure ===
+
+$A$ is a regular language, and so has a DFA that recognises it:
+$M_A = (Q_A, \Sigma, \delta_A, q_A, F_A)$.
+Construct an NFA $M_{A^{*}}$:
+{{$%align%
+M_{A^{*}} &= (Q, \Sigma, \delta, q_0, F) \\
+Q &= Q_A \cup \{q_0\} \\
+F &= F_A \cup \{q_0\} \\
+\delta(q,w) &= \begin{cases}
+  \{\delta_A(q,w)\} & \textrm{if } q \in Q_A \\
+  \{q_A\} & \textrm{if } q \in F \land w = \varepsilon \\
+  \emptyset & \textrm{otherwise}
+\end{cases}
+}}$
+$M_{A^{*}}$ operates the same as $M_A$ with two differences:
+1. it has a different start state, $q_0$, that is accepting and also can
+   $\varepsilon$-transition to $q_A$
+2. when it reaches an accept state, it may nondeterministically
+   $\varepsilon$-transition back to $q_A$.
+
+These differences mean that $M_{A^{*}}$ accepts any number of strings from
+$A$ concatenated together, including zero instances ($\varepsilon$), and no
+other strings.
+Therefore $M_A$ recognises $A$.
+If $M_A$ recognises a language, it must be regular, since NFAs can be reduced to
+DFAs, and all languages recognised by DFAs are regular by definition.

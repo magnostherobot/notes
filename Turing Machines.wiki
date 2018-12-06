@@ -1,0 +1,23 @@
+= Deterministic Turing Machines (DTM/TM) =
+
+Definition:
+{{$%align%
+M &= (Q, \Sigma, \Gamma, \delta,
+  q_0, q_{\textrm{accept}}, q_{\textrm{reject}}) \\
+\Sigma &\subseteq \Gamma \\
+\texttt{_} &\in \Gamma \\
+\delta \colon & \ Q \times \Gamma
+  \rightarrow Q \times \Gamma \times \{\texttt{L},\texttt{R}\} \\
+q_0 &\in Q \\
+q_{\textrm{accept}} &\in Q \\
+q_{\textrm{reject}} &\in Q
+}}$
+
+A TM's tape alphabet $\Gamma$ contains a _blank_ symbol, that is the contents of
+all of the tape not part of the input.
+When a TM enters its accept or reject state, it immediately accepts or rejects
+respectively.
+
+= Deciding Turing Machines/Deciders =
+
+A deciding turing machine (a _decider_) is one that always halts, on any input.

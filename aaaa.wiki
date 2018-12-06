@@ -1,0 +1,16 @@
+{{$
+\Delta w_i = - \alpha \frac{\partial E}{\partial w_i}
+  + \beta w_{ij}(t - 1)
+\\
+\frac{\partial E}{\partial w_i} = \sum_p
+  \frac{\partial E_p}{\partial \textrm{out}_p}
+  \frac{\partial \textrm{out}_p}{\partial \textrm{ex}_p}
+  \frac{\partial \textrm{ex}_p}{\partial w_i}
+\\
+\frac{\partial E_p}{\partial \textrm{out}_p}
+  = \textrm{out}_p - t_p \\
+\frac{\partial \textrm{out}_p}{\partial \textrm{ex}_p}
+  = \textrm{out}_p(1 - \textrm{out}_p) \\
+\frac{\partial \textrm{ex}_p}{\partial w_i}
+  = \textrm{in}_p \\
+}}$

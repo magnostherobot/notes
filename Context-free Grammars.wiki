@@ -1,0 +1,13 @@
+= Context-free Grammars =
+
+Definition:
+{{$%align%
+G &= (V, \Sigma, R, S) \\
+S &\in V
+}}$
+
+A context-free grammar $G$ contains a collection of variables $V$, a collection
+of terminals $\Sigma$, a set of rules to expand variables into strings of
+variables and terminals $R$, and a starting variable $S$.
+
+    A language is context-free iff some pushdown automaton recognises it.

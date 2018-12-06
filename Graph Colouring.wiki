@@ -1,0 +1,5 @@
+= Graph Colouring =
+
+    Given a graph $G$ and a number $n$ of colours, can $G$ be _coloured_ using
+    only $n$ different colours in such a way that no edge has the same colour
+    on both endpoints?

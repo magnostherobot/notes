@@ -1,0 +1,7 @@
+= Logic =
+
+== First-order Predicate Logic ==
+
+== Bayesian Logic ==
+
+- [[Baye's Rule]]

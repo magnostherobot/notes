@@ -1,0 +1,7 @@
+= Searches =
+
+- [[Potential Fields]]
+- [[A*]]
+- [[RRT]]
+- [[BUG]]
+- [[The Local Minimum Problem]]

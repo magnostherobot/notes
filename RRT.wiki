@@ -1,0 +1,18 @@
+= Rapidly-exploring Random Tree =
+
+A _rapidly-exploring random tree_ is an algorithm that starts with a single
+point in free space, then attempts to add randomly-chosen points to the graph.
+It checks if these points can be added to the graph by finding the point
+currently in the graph nearest to the random point, then checking if an edge
+can be made between the two points, satisfying constraints (for exmaple,
+physical barriers). If the edge can be made, both it and the random point are
+added to the graph.
+
+The maximum length of a new edge may be restricted by a growth factor. If this
+restriction causes the distance between a random point its nearest point in the
+graph to be uncloseable by a new edge, the random point is replaced by a new
+point that is collinear with both original points, but can be connected to the
+graph point with an edge. This shows that the random points chosen can be seen
+as "deciding" the directon of expansion of the graph. Since there is naturally
+more blank space in unexplored areas, random points are chosen in blank areas
+more often, and so exploration is pushed toward unexplored areas.

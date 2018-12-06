@@ -1,0 +1,107 @@
+= Deterministic Finite State Automata (DFA/FSA) =
+
+Definition:
+{{$%align%
+M &= (Q, \Sigma, \delta, q_0, F) \\
+\delta \colon  & \ Q \times \Sigma \rightarrow Q \\
+q_0 &\in Q \\
+F &\subseteq Q
+}}$
+
+- $Q$: The set of states in $M$
+- $\Sigma$: The input alphabet of $M$
+- $\delta$: The transition function of $M$
+- $q_0$: The start state of $M$
+- $F$: The set of accepting states in $M$
+
+= Non-deterministic Finite State Automata (NFA/FSA) =
+
+Definition:
+{{$%align%
+M &= (Q, \Sigma, \delta, q_0, F) \\
+\delta \colon & \ Q \times \Sigma_\varepsilon \rightarrow \mathcal{P}(Q) \\
+q_0 &\in Q \\
+F &\subseteq Q
+}}$
+
+- $Q$: The set of states in $M$
+- $\Sigma$: The input alphabet of $M$
+  ($\Sigma_\varepsilon = \Sigma \cup \{\varepsilon \}$)
+- $\delta$: The transition function of $M$
+- $q_0$: The start state of $M$
+- $F$: The set of accepting states in $M$
+
+NFAs have some transitions labeled $\varepsilon$, which can be moved down
+automatically, nondeterministically. Additionally, they may have several
+transitions coming from the same state, with identical labels, which causes
+them to nondeterministically choose both options. Finally, they may have states
+without transitions for certain outcomes: if an NFA is stuck in a position
+without an appropriate transition, it _dies_ and rejects.
+
+NFAs are a generalisation of DFAs.
+
+== Transformation to DFA ==
+
+For an NFA $N = (Q_N, \Sigma, \delta_N, q_N, F_N)$ we can construct a DFA $D$
+that emulates it:
+{{$%align%
+D &= (Q, \Sigma, \delta, E(q_{\{q_N\}}), F) \\
+Q &\subseteq \mathcal{P}(Q_N) \\
+F &= \{q_A \in Q \mid \exists a(a \in A \land a \in F_N)\} \\
+\delta(q_A,w) &= q_{A'} \textrm{ where }
+  A' = \bigcup_{a \in A} E(\delta_N(a,w)) \\
+E(q) &= \{q\} \cup \delta(q, \varepsilon)
+}}$
+$E$ returns all states reachable by $\varepsilon$-transitions from the state
+passed as argument.
+
+$D$ has one state for every possible combination of $N$'s states (each of $N$'s
+states can only appear once in a combination since if two nondeterministic
+permutations of $N$ end up in the same state they are identical and can be
+simplified to a single permutation). $D$'s accepting states are all of its
+states that represents a set of $N$'s states including at least one of $N$'s
+accepting states. Any states created that have no transitions leading into them
+are removed, which is why $Q$ is a subset of $\mathcal{P}(Q_N)$ instead of its
+equal.
+
+== Transformation to GDFA ==
+
+Given a DFA $M$, transform it in the following ways:
+1. If its start state has transitions pointing into it, create a new start state
+   that has an $\varepsilon$-transition leading to the old start state.
+2. If it has several accept states, or if its only accept state has transitions
+   leading away from it, create a new final accept state that all old accept
+   states have $\varepsilon$-transitions leading into it. The old accept states
+   are no longer accepting.
+3. If two transitions exist with the same source and destination states, they
+   are merged into one transition. Its label is the union of the unmerged
+   transitions' labels.
+
+The result of this process is a GDFA.
+
+= Generalised Deterministic Finite State Automata =
+
+Definition:
+{{$%align%
+M &= (Q, \Sigma, \delta, q_0, q_{\textrm{accept}}) \\
+\delta \colon & \ Q \times \Sigma^{*} \rightarrow \mathcal{P}(Q) \\
+q_0 &\in Q \\
+q_{\textrm{accept}} &\in Q
+}}$
+
+- $Q$: The set of states in $M$
+- $\Sigma$: The input alphabet of $M$
+- $\delta$: The transition function of $M$
+- $q_0$: The start state of $M$
+- $q_{\textrm{accept}}$: The accepting state of $M$
+
+GDFAs are DFAs with regular expressions on their transition labels, instead of
+single characters. Additionally, a GDFA's start state cannot have transitions
+leading into it, and its (single) accept state cannot have transitions leading
+out of it.
+
+== Transformation to DFA ==
+
+The labels on the transitions can be expanded to several states with
+interconnecting transitions using the techniques used in the proofs of the
+closure of the regular languages under the regular expression operators.

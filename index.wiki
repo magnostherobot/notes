@@ -1,0 +1,4 @@
+= Module Notes =
+  * [[CS3052]] -- Computational Complexity
+  * [[CS3105]] -- Artificial Intelligence
+  * [[CS3301]] -- Component Technology

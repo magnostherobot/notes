@@ -1,0 +1,29 @@
+= Kleene's Theorem =
+
+    A language is described by a regular expression iff there is a DFA which
+    defines it.
+
+== Proof ==
+
+Given a regular expression for a language, a DFA representing the language can
+be constructed using the techniques used in the proofs of closure under the
+regular expression operators.
+
+Given a DFA, a GDFA can be constructed, on which the following steps can be
+carried out:
+1. If two transitions exist with the same source and destination states, they
+   are merged into one transition. Its label is the union of the unmerged
+   transitions' labels.
+2. Select one state $q$ that is not the start or accept state of the machine,
+   and remove it. Transitions are altered as follows:
+   - A transition with label $R$ that pointed to $q$ becomes transitions
+     pointing to all states that $q$ had transitions pointing to. The labels
+     for these new transitions are $RS$, where $S$ is the label of the old
+     transition that pointed away from $q$. If $q$ had a transition that pointed
+     to itself, the labels instead become $RT^{*}S$, where $T$ is the label of
+     the looping transition.
+3. Repeat steps 1 and 2.
+
+The result is a GDFA with two states and one transition between them.
+This transition will be the regular expression for the language represented
+by the GDFA (and therefore the DFA).

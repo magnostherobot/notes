@@ -1,0 +1,14 @@
+= Push-down Automata (PDA) =
+
+Definition:
+{{$%align%
+M &= (Q, \Sigma, \Gamma, \delta, q_0, F) \\
+\delta \colon & \ Q \times \Sigma_\varepsilon \times \Gamma_\varepsilon
+  \rightarrow \mathcal{P}(Q \times \Gamma_\varepsilon) \\
+q_0 &\in Q \\
+F &\subseteq Q
+}}$
+
+Non-deterministic by default.
+$\Gamma$ is the stack alphabet. It almost always includes a bottom-of-stack
+marker symbol (usually `$`).

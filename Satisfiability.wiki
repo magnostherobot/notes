@@ -1,0 +1,9 @@
+= Satisfiability (SAT) =
+
+    Given formula $S$, composed of boolean variables and logical connectives.
+    Is there a way to assign TRUE and FALSE to the variables so that $S$ is
+    TRUE?
+
+= 3-SAT =
+
+Like SAT. Additionally, all clauses have exactly 3 atomic terms.
