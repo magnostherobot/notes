@@ -1,0 +1,33 @@
+= Validation and Verification =
+
+*Validation*: are we building the right thing?
+*Verification*: are we building the thing right?
+
+== Verification Techniques ==
+
+_Peer Reviewing_: have the code checked by other people, who didn't write the
+code. This is a static analysis, and is considered quite effective. However,
+errors such as those introduced by concurrency are very difficult for a peer to
+spot.
+
+_Software Testing_: Run some tests on the program - this is the traditional way
+of verifiying a program does what it is supposed to do. Usually a major part of
+a software project. Requires developers to "guess" what input values could cause
+problems, since testing for all inputs is not feasible. _Does not guarantee
+total absence of faults_.
+
+_Formal Verification_: Prove for certain that the system is free of bugs. Uses
+formal methodology to acheive this. This form of verification is slowly gaining
+popularity as regular _software testing_ is being found to be insufficient for
+large and important systems.
+
+== Limits of Verification ==
+
+- For hardware, verification can only be used to find faults in design.
+- The formal model being used may be a faulty interpretation of what is meant to
+happen; verification doesn't validate a model.
+- The actual code implementation of the model may be inconsistent with the
+model. While models should be unambiguous, programming languages tend to include
+some ambiguities.
+- The tools used for forming or verifying the model may include bugs, which
+could lead to erroneous results.

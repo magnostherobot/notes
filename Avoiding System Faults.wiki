@@ -1,0 +1,32 @@
+= System Faults =
+
+== Avoiding System Faults ==
+
+To avoid a system failure, ensure one of the following:
+
+# _Fault Prevention_: the system is proven to not contain faults;
+# _Fault Tolerance_: the system can compensate for the faults that may happen;
+# _Fail Safety_: Don't actually avoid failures, just make sure failures that
+_do_ happen aren't catastrophic.
+
+== Kinds of System Faults ==
+
+_Design Faults_ are faults produced by the high-level design of the system.
+These are the kinds of fault that can be detected using software verification.
+
+_Fabrication Faults_ are faults produced when real life behaves differently from
+simulations (e.g. a simulation not including correct heat dissipation stats for
+a processor design resulting in the processor not working as intended).
+
+_Usage Faults_ are faults caused by poor usage or maintenance, or worn-out
+components.
+
+== Importance of Avoiding Faults in Hardware ==
+
+- Making mistakes is more costly since hardware is more expensive to
+make/replace than software.
+- Actually replacing hardware to fix bugs is basically unheard of in the modern
+day.
+- Generally speaking, expectations of quality for hardware is higher than that
+for software.
+- Getting hardware to market soon positively affects potential revenue.

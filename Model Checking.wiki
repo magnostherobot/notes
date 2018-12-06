@@ -1,0 +1,49 @@
+= Model Checking =
+
+Model checking can be used to verify that a simplified model of a system does
+what it's supposed to do, through inspection of all states of a state graph used
+to represent the model. Model checking is automated, and if a required property
+does not hold for a model, can be used to find a specific counterexample to the
+property.
+
+A _property specification_ $\phi$ is a property required of a system.
+A _system model_ $M$ is a formal model that represents the system.
+A _model checker_ is used to find out whether or not $\phi$ is satisfied by $M$
+($M \vDash \phi$).
+If $M \nvDash \phi$, then the model checker should give a counterexample: a path
+of execution $\sigma$ that leads from an initial state to a state that violates
+$\phi$.
+
+== Models ==
+
+Formal models should be precise and unambiguous, so that it is possible to prove
+properties over them. Properties required of the model should also be clear and
+specific, so that it is possible to check if they hold for the given model.
+
+Models are based on finite-state automata, and as such are composed of states
+and transitions.
+
+== Property Specifications ==
+
+Property specifications should be able to describe
+- _functional correctness_: the expected behaviour of the system;
+- _reachability_: the possibilities of deadlocks in the system;
+- _safety_: the possibility of bad things happenning;
+- _liveness_: the possibility of good things happenning;
+- _fairness_: whether or not specific events occur repeatedly;
+- _real-time properties_: all of the above, under time constraints.
+
+== The State-space Explosion Problem ==
+
+The number of states needed to model the system accurately may easily exceed the
+amount of available computer memory. In these cases, a simpler model is
+required, or a model checker more conservative with memory allocation per state
+could be used.
+
+== Concurrent Systems ==
+
+In SPIN (and ProMeLa), concurrent systems can:
+- _interleave_ (behave independently);
+- communicate to one another using shared global variables;
+- communicate to one another using channels (this can be synchronous or
+asynchronous).
