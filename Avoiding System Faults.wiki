@@ -6,8 +6,7 @@ To avoid a system failure, ensure one of the following:
 
 # _Fault Prevention_: the system is proven to not contain faults;
 # _Fault Tolerance_: the system can compensate for the faults that may happen;
-# _Fail Safety_: Don't actually avoid failures, just make sure failures that
-_do_ happen aren't catastrophic.
+# _Fail Safety_: Don't actually avoid failures, just make sure failures that _do_ happen aren't catastrophic.
 
 == Kinds of System Faults ==
 
@@ -23,10 +22,7 @@ components.
 
 == Importance of Avoiding Faults in Hardware ==
 
-- Making mistakes is more costly since hardware is more expensive to
-make/replace than software.
-- Actually replacing hardware to fix bugs is basically unheard of in the modern
-day.
-- Generally speaking, expectations of quality for hardware is higher than that
-for software.
+- Making mistakes is more costly since hardware is more expensive to make/replace than software.
+- Actually replacing hardware to fix bugs is basically unheard of in the modern day.
+- Generally speaking, expectations of quality for hardware is higher than that for software.
 - Getting hardware to market soon positively affects potential revenue.

@@ -45,5 +45,4 @@ could be used.
 In SPIN (and ProMeLa), concurrent systems can:
 - _interleave_ (behave independently);
 - communicate to one another using shared global variables;
-- communicate to one another using channels (this can be synchronous or
-asynchronous).
+- communicate to one another using channels (this can be synchronous or asynchronous).
