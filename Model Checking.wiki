@@ -33,6 +33,69 @@ Property specifications should be able to describe
 - _fairness_: whether or not specific events occur repeatedly;
 - _real-time properties_: all of the above, under time constraints.
 
+=== Safety Properties ===
+
+    Nothing bad should ever happen.
+
+Safety properties should refer to all states in the system.
+
+The _mutual exclusion property_ is an example of a safety property: it's
+important that no two processes are in critical sections simultaneously.
+
+_Invariants_ are also examples of safety properties: invariants are statements
+that a property is always the case, no matter what, in the system.
+
+_System termination_ is another kind of safety property: all processes must end
+up in an acceptable end state.
+
+=== Liveness Properties ===
+
+    Something good will eventually happen.
+
+Liveness properties can be used to guarantee that progress is made, and as such
+need to run for all possible execution paths.
+
+Examples:
+- Each process will eventually enter its critical section.
+- Each process will enter its critical section infinitely often.
+- Each waiting process will eventually enter its critical section.
+
+Checking for non-progress cycles is a kind of liveness property: if a process
+can enter a loop that does not "do work", then the system could ned up in a
+deadlock state, and so fails the liveness property.
+
+=== Fairness Constraints ===
+
+*Unconditional Fairness*: Every process can execute an atomic transition
+ infinitely often.
+
+*Strong Fairness*: Every process that can execute an atomic transition
+ infinitely often, gets to do so infinitely often. Strong fairness can be
+ expressed in SPIN as:
+
+{{{promela
+never {
+  S0:
+    do
+    :: P@l0 && !(P@l2) -> break
+    :: !(P@l0) && !(P@l2)
+    od;
+  accept: !(P@l2);
+  S1:
+    do
+    :: !(P@l0) && !(P@l2) -> goto S0
+    :: !(P@l2)
+    od
+}
+}}}
+
+*Weak Fairness*: Every process that is continuously able to execute an atomic
+ transition gets to do so infinitely often. Weak fairness is supported in SPIN.
+
+The difference between _continuous_ and _infinitely often_ is that continuous
+means it's always on, while infinitely often means it goes on-and-off lots and
+lots (so long as it never stops switching back on).
+
 == The State-space Explosion Problem ==
 
 The number of states needed to model the system accurately may easily exceed the
