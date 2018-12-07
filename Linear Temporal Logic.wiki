@@ -21,18 +21,18 @@ and are used infrequently, but are convenient at times:
 
 === Operator Equivalences ===
 
-{{$
+{{$%align%
 \neg \square p &\equiv \lozenge \neg p \\
 \lozenge p &\equiv \textrm{true} \mathbin{\mathcal{U}} p \\
 \square p &\equiv \textrm{false} \mathbin{\mathcal{R}} p \\
-p \mathbin{\mathcal{R}} q &\equiv \neg (\neg p \mathbin{\mathcal{U}} \neg q) \\
-p \mathbin{\mathcal{M}} q &\equiv \neg (\neg p \mathbin{\mathcal{W}} \neg q) \\
+\neg (p \mathbin{\mathcal{R}} q) &\equiv \neg p \mathbin{\mathcal{U}} \neg q \\
+\neg (p \mathbin{\mathcal{M}} q) &\equiv \neg p \mathbin{\mathcal{W}} \neg q \\
 p \mathbin{\mathcal{W}} q &\equiv
 (p \mathbin{\mathcal{U}} q) \lor (\square p) \\
 p \mathbin{\mathcal{M}} q &\equiv
 (p \mathbin{\mathcal{R}} q) \land (\lozenge p) \\
 p \mathbin{\mathcal{U}} q &\equiv
-q \lor (q \land \mathcal{X}(p \mathbin{\mathcal{U}} q))
+q \lor (p \land \mathcal{X}(p \mathbin{\mathcal{U}} q))
 }}$
 
 == Expressing Properties in LTL ==
