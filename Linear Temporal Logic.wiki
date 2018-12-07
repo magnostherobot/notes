@@ -1,0 +1,54 @@
+= Linear Temporal Logic =
+
+Logic that describes the veracity of elements over discrete time.
+
+== LTL Operators ==
+
+There are two primary temporal operators for LTL:
+- $\mathcal{X}p$: _next_ $p$.
+- $p \mathbin{\mathcal{U}} q$: $p$ _until_ $q$.
+
+There are also operators that can be created from these primary operators that
+are used frequently:
+- $\square p$: _always_ $p$.
+- $\lozenge p$: _eventually_ $p$.
+
+Finally, there are extra operators that can be formed from the primary operators
+and are used infrequently, but are convenient at times:
+- $p \mathbin{\mathcal{W}} q$: $p$ _weak until_ $q$.
+- $p \mathbin{\mathcal{R}} q$: $p$ _weak release_ $q$.
+- $p \mathbin{\mathcal{M}} q$: $p$ _strong release_ $q$.
+
+=== Operator Equivalences ===
+
+{{$
+\neg \square p &\equiv \lozenge \neg p \\
+\lozenge p &\equiv \textrm{true} \mathbin{\mathcal{U}} p \\
+\square p &\equiv \textrm{false} \mathbin{\mathcal{R}} p \\
+p \mathbin{\mathcal{R}} q &\equiv \neg (\neg p \mathbin{\mathcal{U}} \neg q) \\
+p \mathbin{\mathcal{M}} q &\equiv \neg (\neg p \mathbin{\mathcal{W}} \neg q) \\
+p \mathbin{\mathcal{W}} q &\equiv
+(p \mathbin{\mathcal{U}} q) \lor (\square p) \\
+p \mathbin{\mathcal{M}} q &\equiv
+(p \mathbin{\mathcal{R}} q) \land (\lozenge p) \\
+p \mathbin{\mathcal{U}} q &\equiv
+q \lor (q \land \mathcal{X}(p \mathbin{\mathcal{U}} q))
+}}$
+
+== Expressing Properties in LTL ==
+
+An invariant $p$ can be expressed as $\square p$.
+
+A _reply_ (that $q$ happens in response to $p$) can be expressed as
+$p \rightarrow q$.
+
+A _guaranteed reply_ (that $q$ _always_ happens in response to $p$) can be
+expressed as $\square (p \rightarrow q)$.
+
+To check that progress is always made, or that $p$ is infinitely often true,
+the LTL $\square \lozenge p$ can be used.
+
+To check for _stability_, that $p$ is eventually always the case,
+$\lozenge \square p$ can be used.
+
+_Exclusion_ can be described using LTL as $\square (p \rightarrow \neg q)$.
