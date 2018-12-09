@@ -1,0 +1,89 @@
+= Transition Systems =
+
+{{$
+TS=(S, Act, T, I, AP, L)
+}}$
+
+- $S$: The set of states in $TS$
+- $Act$: The set of actions in $TS$
+- $T \subseteq S \times Act \times S$: A _transition relation_; a start state,
+    an action, and an end state make a 3-tuple
+- $I \subseteq S$: The set of initial states in $TS$
+- $AP$: The set of atomic propositions in $TS$
+- $L \colon S \rightarrow \mathcal{P}(AP)$: The _labelling function_; given a
+    state, returns all atomic propositions associated with the state.
+
+$TS$ is finite _iff_ $S$, $Act$ and $AP$ are all finite.
+
+A state $s$ satisfies an LTL $\phi$ _iff_ the atomic propositions associated
+with $s$ satisfy $\phi$:
+{{$
+s \models \phi \leftrightarrow L(s) \models \phi
+}}$
+
+== Direct Predecessors and Successors ==
+
+For a transition system $TS = (S, Act, T, I, AP, L)$, the
+_direct successors_ for a state $s \in S$ is the set of states that can be
+reached with a single transition from $s$. This can be limited to a specific
+action: for an action $\alpha \in Act$, the _direct $\alpha$-sucessors_ of $s$
+is the set of states that can be reached with a single $\alpha$-transition from
+$s$:
+{{$
+Post(s, \alpha) = \{ s' \in S \mid (s, \alpha, s') \in T \}
+}}$
+
+Predecessors are similar, except they are the set of states that lead to $s$
+using a single ($\alpha$-) transition - for a state $s \in S$ and an action
+$\alpha \in Act$, the _direct $\alpha$-predecessors of $s$_ is given by:
+{{$
+Pre(s, \alpha) = \{ s' \in S \mid (s', \alpha, s) \in T \}
+}}$
+
+A state $s$ is a _terminal_ state _iff_ it has no transitions going from it:
+that is, if $Post(s) = \emptyset$.
+
+== Determinism ==
+
+Deterministic behaviour can be observed in two ways:
+- *Action-based* determinism is deterministic on the observed actions - there
+   is at most one transition leading from every state labelled with an action.
+- *State-based* determinism is deterministic on the observed atomic propositions
+   of states: for every label on a state, there is at most one direct successor
+   that also has that proposition.
+
+== Execution Fragments ==
+
+For a transition system $\Pi = (S, A, T, I, P, L)$, a finite execution fragment
+$\rho$ of $\Pi$ is an alternating sequence of states and actions ending with a
+state:
+{{$
+\rho = s_0 \alpha_1 s_1 \alpha_2 s_2 \cdots \alpha_n s_n
+}}$
+such that
+{{$
+\left( s_i, \alpha_{i+1}, s_{i+1} \right) \in T, 0 \leq i \lt n, n \geq 0
+}}$
+
+Execution fragments can also be infinite: these fragments have similar rules,
+but carry on inifinitely.
+
+An execution fragment is _maximal_ _iff_ either:
+- It is infinite, or
+- It is finite, and ends with a terminal state.
+
+An execution fragment is _initial_ _iff_ it starts in an initial state
+($s \in I$).
+
+An execution fragment is an _execution_ of $\Pi$ _iff_ it is initial and
+maximal.
+
+== Reachability ==
+
+For a transition system $\Pi = (S, A, T, I, P, L)$, a state $s \in S$ is
+_reachable_ _iff_ there exists an initial, finite execution fragment $\rho$ in
+which
+{{$
+\rho = \cdots \alpha_n s
+}}$
+where $s_0 \in I$ $n \geq 0$
